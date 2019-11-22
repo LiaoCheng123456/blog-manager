@@ -1,0 +1,14 @@
+server:
+    port: 8888
+spring:
+    datasource:
+        url: jdbc:mysql://localhost:3306/blog?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true
+        username: root
+        password: root
+        driver-class-name: com.mysql.jdbc.Driver
+logging:
+    config: classpath:log4j2.xml
+
+mybatis:
+    mapperLocations: classpath:mapper/*.xml
+    typeAliasesPackage: com.service.blog.model
