@@ -106,4 +106,15 @@ public class ArticleService {
         }
         return JSON.toJSONString(resultUtils);
     }
+
+    public String getArticleFunction(String requestParam) {
+        ResultUtils resultUtils = new ResultUtils();
+        Article article = JSON.parseObject(requestParam, Article.class);
+        try {
+            resultUtils.setData(articleDao.getArticle(article));
+        } catch (Exception e) {
+            return LoggerUtils.error(requestParam, e);
+        }
+        return JSON.toJSONString(resultUtils);
+    }
 }

@@ -47,9 +47,18 @@ public class ArticleController extends BaseController {
      * @return
      */
     @GetMapping(value = ArticleRoute.GET_ARTICLE_LIST, headers = Const.HEADERS, produces = Const.PRODUCES_JSON)
-    public String getArticleListFunction(HttpServletRequest request, @RequestParam(value = Const.MUST_PARAM_TITLE, required = Const.FALSE) String title) {
+    public String getArticleListFunction(HttpServletRequest request,
+                                         @RequestParam(value = Const.MUST_PARAM_TITLE, required = Const.FALSE) String title) {
         Article article = new Article();
         article.setTitle(title);
         return articleService.getArticleListFunction(JSON.toJSONString(article));
+    }
+
+    @GetMapping(value = ArticleRoute.GET_ARTICLE, headers = Const.HEADERS, produces = Const.PRODUCES_JSON)
+    public String getArticleFunction(HttpServletRequest request,
+                                         @RequestParam(value = Const.ID, required = Const.FALSE) Long id) {
+        Article article = new Article();
+        article.setId(id);
+        return articleService.getArticleFunction(JSON.toJSONString(article));
     }
 }

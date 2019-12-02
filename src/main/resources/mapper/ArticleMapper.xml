@@ -14,4 +14,8 @@
 	<select id="getArticleList" parameterType="Article" resultType="Article">
 		select * from t_article
 	</select>
+
+	<select id="getArticle" parameterType="Article" resultType="Article">
+		select * from t_article where id = #{id}
+	</select>
 </mapper>
