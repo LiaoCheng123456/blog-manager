@@ -52,9 +52,13 @@ public class ArticleService {
             user.setId(article.getAuthor());
             if (commonHelperService.checkUserExists(resultUtils, user)) return JSON.toJSONString(resultUtils);
 
-            generatorArticleParameter(article);
+            if (article.getId() == null) {
+                generatorArticleParameter(article);
+                articleDao.addArticle(article);
+            } else {
+                articleDao.modifyArticle(article);
+            }
 
-            articleDao.addArticle(article);
         } catch (Exception e) {
             return LoggerUtils.error(requestParam, e);
         }

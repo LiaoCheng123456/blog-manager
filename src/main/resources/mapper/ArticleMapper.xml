@@ -6,16 +6,51 @@
 
     <insert id="addArticle" parameterType="Article">
 		insert into t_article
-		(id, title, content, author, isDelete, readNumber, praiseNumber, browseNumber, addTime, updateTime)
+		(id, title, content, markdown, author, isDelete, readNumber, praiseNumber, browseNumber, addTime, updateTime)
 		values
-		(#{id}, #{title}, #{content}, #{author}, #{isDelete}, #{readNumber}, #{praiseNumber}, #{browseNumber}, #{addTime}, #{updateTime})
+		(#{id}, #{title}, #{content}, #{markdown}, #{author}, #{isDelete}, #{readNumber}, #{praiseNumber}, #{browseNumber}, #{addTime}, #{updateTime})
 	</insert>
 
-	<select id="getArticleList" parameterType="Article" resultType="Article">
+    <update id="modifyArticle" parameterType="Article">
+        update t_article set
+
+        <trim suffixOverrides=",">
+            <if test="title != null">
+                title = #{title} ,
+            </if>
+            <if test="content != null">
+                content = #{content} ,
+            </if>
+            <if test="author != null">
+                 author = #{author} ,
+            </if>
+            <if test="isDelete != null">
+                 isDelete = #{isDelete} ,
+            </if>
+            <if test="markdown != null">
+                markdown = #{markdown} ,
+            </if>
+            <if test="readNumber != null">
+                 readNumber = #{readNumber} ,
+            </if>
+            <if test="praiseNumber != null">
+                 praiseNumber = #{praiseNumber} ,
+            </if>
+            <if test="browseNumber != null">
+                 browseNumber = #{browseNumber} ,
+            </if>
+            <if test="updateTime != null">
+                 updateTime = #{updateTime} ,
+            </if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <select id="getArticleList" parameterType="Article" resultType="Article">
 		select * from t_article
 	</select>
 
-	<select id="getArticle" parameterType="Article" resultType="Article">
+    <select id="getArticle" parameterType="Article" resultType="Article">
 		select * from t_article where id = #{id}
 	</select>
 </mapper>
